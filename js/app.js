@@ -70,7 +70,7 @@ var AppRouter = Backbone.Router.extend({
 		======================*/
 		this.flymenuItemModel = new FlyMenuItem();   //// is the MODEL 
 		this.flymenuItemView = new FlyMenuItemDetails (		 //// is the VIEW
-			{ sadf
+			{ 
 				/*
 				category: 'Dry Fly',
 				hooksizes: '8,10,12,14,16,18,20,22',
