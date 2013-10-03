@@ -25,8 +25,8 @@ var AppRouter = Backbone.Router.extend({
 		///////"fly-items/new"		: "itemForm_fly",
 		///////"fly-items/:flyitem" 	: "itemDetails_fly",
 		//"fly-items/:item" 	: "itemDetails_fly",
-		"relatedflycategories/:relatedflies" : "relatedfliesDetails"
-
+		"relatedflycategories/:relatedflies" : "relatedfliesDetails",
+		"flyorders/:item" : "flyorderItem"
 	},
 
 
@@ -48,22 +48,11 @@ var AppRouter = Backbone.Router.extend({
 		this.flymenuItems = new FlyMenuItems();		//// Creating Collection object
 		this.flymenuItems.fetch();					//// Fetching data from server
 
-
 		/*====================
-		*	orig ------ DELETE
-		====================== 
-		this.menuItemModel = new MenuItem();   		//// is the MODEL
-		this.menuItemView = new MenuItemDetails(	//// is the VIEW
-			{
-				/*
-				category: 'Entreés',
-				imagepath: 'garden-salad.jpg'
-				*-----/
-				model: this.menuItemModel
-			}
-
-
-		);*/
+		*	 ORDER
+		======================*/
+		this.flyorderedItems = new FlyMenuItems();	//// Creating new instance of the Collection object
+		this.flyordersView = new FlyOrdersView({collection: this.flyorderedItems})
 
 		/*====================
 		*	 MENU
@@ -82,35 +71,9 @@ var AppRouter = Backbone.Router.extend({
 
 		);
 
-					/*====================
-					*	LIST  -- THis is how you would render a single MODEL
-							  -- better to render a COLLECTION though
-					======================
-
-					this.flymenuList = new FlyMenuList();   //// is the MODEL
-					this.flymenuView = new FlyMenuView (	//// is the VIEW
-						{
-							// set this model into the menu view
-							model: this.flymenuList
-						}
-
-					);*/
-
-					/*
-					/*====================
-					*	LIST  -- THis is how you would render a HARD-CODED ARRAY
-					======================
-					this.flymenuView = new FlyMenuView(
-						{
-							items: [
-								"Garden Salad",
-								"Pizza",
-								"Cheesecake"
-							]
-						}
-					);*/
-
-		// instead we want to pass in the collection
+		/*====================
+		*	 COLLECTION
+		======================*/
 		this.flymenuView = new FlyMenuView({collection: this.flymenuItems});
 
 
@@ -273,6 +236,14 @@ var AppRouter = Backbone.Router.extend({
 	relatedfliesDetails: function(relatedflies) {
 		this.flyRelatedView.options.relatedflies = relatedflies;
 		$('#app2_sub').html(this.flyRelatedView.render().el);
+	},
+
+	flyorderItem: function (item) {
+			//flymenuItem comes back as a model
+		var flymenuItem = this.flymenuItems.get(item);
+		this.flyorderedItems.add(flymenuItem);
+			// render flyorders VIEW
+		$('#app').html(this.flyordersView.render().el)
 	},
 
 	itemForm_fly: function(){
