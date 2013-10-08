@@ -26,7 +26,7 @@ var AppRouter = Backbone.Router.extend({
 		///////"fly-items/:flyitem" 	: "itemDetails_fly",
 		//"fly-items/:item" 	: "itemDetails_fly",
 		"relatedflycategories/:relatedflies" : "relatedfliesDetails",
-		"flyorders/:item" : "flyorderItem"
+		"v_flyorders/:item" : "flyorderItem"
 	},
 
 
@@ -70,6 +70,19 @@ var AppRouter = Backbone.Router.extend({
 			}
 
 		);
+
+		/*====================
+		*	LIST  -- THis is how you would render a HARD-CODED ARRAY
+		======================
+		this.flymenuView = new FlyMenuView(
+			{
+				items: [
+					"Garden Salad",
+					"Pizza",
+					"Cheesecake"
+				]
+			}
+		*/
 
 		/*====================
 		*	 COLLECTION
@@ -141,29 +154,6 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	flyitemDetails: function (item) {
-		// --- $('#app').html('Menu item: ' + item); // here we're outputting name of item in the dom
-		/* --- here we're declairing a new view everytime MenuItemDetails is called
-				wastefull and degrades the app
-		var view = new MenuItemDetails (
-			{
-				name: item,
-				category: 'Entreés',
-				imagepath: 'garden-salad.jpg'
-			}
-		);
-		
-			// rendering the dom
-		$('#app').html(view.render().el);
-		*/
-
-		//old --- this.menuItemView.options.name = item;
-		//old --- this.menuItemModel.set('name',item);
-
-			// wasteful to fetch the ID from the server
-			// instead fetch the model from the COLLECTION
-			// then render the data in the view
-		//this.menuItemModel.set('id', item);
-		//this.menuItemModel.fetch();
 
 			// *** Save a trip to the server ***
 			// instead fetch the model from the COLLECTION
