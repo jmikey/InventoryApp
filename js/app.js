@@ -26,7 +26,9 @@ var AppRouter = Backbone.Router.extend({
 		///////"fly-items/:flyitem" 	: "itemDetails_fly",
 		//"fly-items/:item" 	: "itemDetails_fly",
 		"relatedflycategories/:relatedflies" : "relatedfliesDetails",
-		"v_flyorders/:item" : "flyorderItem"
+		
+			//any route matching this item goes to the new flyorderItem function
+		"flyorders/:item" : "flyorderItem"
 	},
 
 
@@ -52,7 +54,10 @@ var AppRouter = Backbone.Router.extend({
 		*	 ORDER
 		======================*/
 		this.flyorderedItems = new FlyMenuItems();	//// Creating new instance of the Collection object
+			
+			//passed flyorderedItems as the collection for flyorderedView
 		this.flyordersView = new FlyOrdersView({collection: this.flyorderedItems})
+
 
 		/*====================
 		*	 MENU
